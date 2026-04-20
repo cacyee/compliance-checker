@@ -3,19 +3,19 @@
   "rules": [
     {
       "name": "医疗/疗效宣称",
-      "pattern": "\\b(cure|treat|heal|prevent disease|anti-bacterial|fda approved|medically proven)\\b"
+      "pattern": "(?i)\\b(cure[sd]?|treat[esd]?|heal[sed]?|eliminates?|prevents? disease|anti-?bacterial|fda approved|medically proven)\\b"
     },
     {
       "name": "绝对化用语",
-      "pattern": "\\b(best|perfect|#1|ultimate|guaranteed results|100% effective|most effective)\\b"
+      "pattern": "(?i)\\b(best|perfect|#1|ultimate|guaranteed results?|100% effective|most effective)\\b"
     },
     {
       "name": "TikTok 特有违规",
-      "pattern": "\\b(dm for link|comment to buy|free gift with purchase)\\b"
+      "pattern": "(?i)\\b(dm for link|comment to buy|free gift with purchase)\\b"
     },
     {
-      "name": "虚假宣称",
-      "pattern": "\\b(scientifically proven|clinically tested|dermatologist recommended)\\b"
+      "name": "虚假/未经证实宣称",
+      "pattern": "(?i)\\b(scientifically proven|clinically tested|dermatologist recommended|miracle|overnight result)\\b"
     }
   ]
 }
