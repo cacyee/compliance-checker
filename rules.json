@@ -3,27 +3,27 @@
   "rules": [
     {
       "name": "医疗/疗效宣称 (Medical Claims)",
-      "pattern": "(?i)\\b(cure[sd]?|treat[esd]?|heal[sed]?|eliminates?|removes?|prevents?|reduces?|relieves?|soothes?|anti-?bacterial|anti-?viral|anti-?fungal|fda approved|ce certified|fcc certified|epa certified|medically proven|dermatologist tested|clinically proven|kills germs|boosts immunity|enhances immunity|treats acne|cures scars|permanent results?|instantly eliminates?|miracle cure|whitens?|brightens?|lightens skin|fades dark spots|erases wrinkles|reverses aging|lifts sagging skin|tightens pores|shrinks pores|melts fat|burns calories|blocks calories|detoxifies|cleanses toxins|purifies blood|regrows hair|stops hair loss|grows eyelashes|lengthens lashes|thickens hair|volumizes hair)\\b"
+      "pattern": "\\b(cure[sd]?|treat[esd]?|heal[sed]?|eliminates?|removes?|prevents?|reduces?|relieves?|soothes?|anti-?bacterial|anti-?viral|anti-?fungal|fda approved|ce certified|fcc certified|epa certified|medically proven|dermatologist tested|clinically proven|kills germs|boosts immunity|enhances immunity|treats acne|cures scars|permanent results?|instantly eliminates?|miracle cure|whitens?|brightens?|lightens skin|fades dark spots|erases wrinkles|reverses aging|lifts sagging skin|tightens pores|shrinks pores|melts fat|burns calories|blocks calories|detoxifies|cleanses toxins|purifies blood|regrows hair|stops hair loss|grows eyelashes|lengthens lashes|thickens hair|volumizes hair)\\b"
     },
     {
       "name": "绝对化/极限用语 (Absolute/Superlative Claims)",
-      "pattern": "(?i)\\b(best|perfect|#1|ultimate|guaranteed results?|100% effective|most effective|highest quality|top rated|number one|world's best|only|unique|unmatched|irreplaceable|absolute best|completely safe|totally natural|purest form|maximum strength|superior to all|unbeatable price|cheapest ever|lowest price guaranteed|free|lifetime warranty|high quality|gift|git|best seller|hot sale|top seller|popular best)\\b"
+      "pattern": "\\b(best|perfect|#1|ultimate|guaranteed results?|100% effective|most effective|highest quality|top rated|number one|world's best|only|unique|unmatched|irreplaceable|absolute best|completely safe|totally natural|purest form|maximum strength|superior to all|unbeatable price|cheapest ever|lowest price guaranteed|free|lifetime warranty|high quality|gift|best seller|hot sale|top seller|popular best)\\b"
     },
     {
       "name": "TikTok/站外引流 (Off-Platform Diversion)",
-      "pattern": "(?i)\\b(dm for link|comment to buy|free gift with purchase|add me on wechat|add my whatsapp|visit my website|check my bio|link in bio|paypal payment|pay via venmo|amazon link|shopify store|instagram page|snapchat me|telegram channel|whatsapp order|wechat id|line id|kakao talk|website|bio|paypal|apple pay|amazon|shopify|instagram|app|snapchat|page|contact us|we will reply|please contact|dm me|私信|加我|主页有链接)\\b"
+      "pattern": "\\b(dm for link|comment to buy|free gift with purchase|add me on wechat|add my whatsapp|visit my website|check my bio|link in bio|paypal payment|pay via venmo|amazon link|shopify store|instagram page|snapchat me|telegram channel|whatsapp order|wechat id|line id|kakao talk|website|bio|paypal|apple pay|amazon|shopify|instagram|app|snapchat|page|contact us|we will reply|please contact|dm me|私信|加我|主页有链接)\\b"
     },
     {
       "name": "虚假/未经证实宣称 (Unsubstantiated Claims)",
-      "pattern": "(?i)\\b(scientifically proven|lab tested|doctor recommended|miracle|overnight results?|results in 3 days|see results fast|works like magic|secret formula|ancient remedy|all natural|chemical free|no side effects|risk free|money back guarantee|hypoallergenic|non-comedogenic|dermatologist recommended|as seen on tv|celebrity endorsed|viral on tiktok|maker|journey|diamond|presentation|sexy|selected with|another words|windows on the board|full life|gladness|gained presentation|cheating stars|life dream|life shows|love|party|gossip games)\\b"
+      "pattern": "\\b(scientifically proven|lab tested|doctor recommended|miracle|overnight results?|results in 3 days|see results fast|works like magic|secret formula|ancient remedy|all natural|chemical free|no side effects|risk free|money back guarantee|hypoallergenic|non-comedogenic|dermatologist recommended|as seen on tv|celebrity endorsed|viral on tiktok|maker|journey|diamond|presentation|sexy|selected with|another words|windows on the board|full life|gladness|gained presentation|cheating stars|life dream|life shows|love|party|gossip games)\\b"
     },
     {
       "name": "Amazon 特有违禁词 (Amazon-Specific)",
-      "pattern": "(?i)\\b(free shipping|discount code|promo code|subscribe and save|authentic guarantee|original brand|official store|new arrival|offer of the day|christmas sale|summer|durable|collapsible|operation|our product|my product|we are|we will reply within|please feel free to contact|perfect gift)\\b"
+      "pattern": "\\b(free shipping|discount code|promo code|subscribe and save|authentic guarantee|original brand|official store|new arrival|offer of the day|christmas sale|summer|durable|collapsible|operation|our product|my product|we are|we will reply within|please feel free to contact|perfect gift)\\b"
     },
     {
       "name": "Shopee/TikTok Shop 通用违禁词 (General E-commerce)",
-      "pattern": "(?i)\\b(buy one get one|bogo|b1g1|limited time offer|act now|don't miss out|click here|order now|buy now|sale ends soon|while supplies last|exclusive deal|special offer|clearance sale|fire sale|blowout sale|insanely cheap|unbelievable price|too good to be true|miracle cream|magic solution|secret ingredient|proprietary blend)\\b"
+      "pattern": "\\b(buy one get one|bogo|b1g1|limited time offer|act now|don't miss out|click here|order now|buy now|sale ends soon|while supplies last|exclusive deal|special offer|clearance sale|fire sale|blowout sale|insanely cheap|unbelievable price|too good to be true|miracle cream|magic solution|secret ingredient|proprietary blend)\\b"
     }
   ]
 }
