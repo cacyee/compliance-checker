@@ -1,0 +1,21 @@
+{
+  "lastUpdated": "2026-04-20",
+  "rules": [
+    {
+      "name": "医疗/疗效宣称",
+      "pattern": "\\b(cure|treat|heal|prevent disease|anti-bacterial|fda approved|medically proven)\\b"
+    },
+    {
+      "name": "绝对化用语",
+      "pattern": "\\b(best|perfect|#1|ultimate|guaranteed results|100% effective|most effective)\\b"
+    },
+    {
+      "name": "TikTok 特有违规",
+      "pattern": "\\b(dm for link|comment to buy|free gift with purchase)\\b"
+    },
+    {
+      "name": "虚假宣称",
+      "pattern": "\\b(scientifically proven|clinically tested|dermatologist recommended)\\b"
+    }
+  ]
+}
