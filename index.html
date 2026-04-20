@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>电商文案合规检测 - 免费在线工具</title>
+  <meta name="description" content="一键检测 TikTok、Amazon、Shopee 商品文案是否违规，支持医疗宣称、绝对化用语等高危词实时高亮。">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f8f9fa;
+      color: #333;
+      line-height: 1.6;
+    }
+    header {
+      background: white;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      padding: 20px;
+      text-align: center;
+    }
+    h1 {
+      font-size: 28px;
+      color: #1a73e8;
+      margin-bottom: 8px;
+    }
+    .container {
+      max-width: 800px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+    textarea {
+      width: 100%;
+      height: 160px;
+      padding: 16px;
+      font-size: 16px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      margin: 15px 0;
+      resize: vertical;
+    }
+    button {
+      background: #1a73e8;
+      color: white;
+      border: none;
+      padding: 14px 28px;
+      font-size: 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      width: 100%;
+      font-weight: bold;
+    }
+    button:hover {
+      background: #0d5bb8;
+    }
+    #result {
+      margin-top: 25px;
+      padding: 20px;
+      border-radius: 10px;
+      min-height: 60px;
+      font-size: 18px;
+    }
+    .pass { background: #e6f4ea; color: #137333; border: 1px solid #81c995; }
+    .fail { background: #fce8e6; color: #c62828; border: 1px solid #f28b82; }
+    .highlight {
+      background: #ffcccc;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-weight: bold;
+      margin: 0 2px;
+    }
+    footer {
+      text-align: center;
+      padding: 30px 0;
+      color: #666;
+      font-size: 14px;
+    }
+    @media (max-width: 600px) {
+      h1 { font-size: 24px; }
+      .container { padding: 0 15px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>📦 电商文案合规检测器</h1>
+    <p>支持 TikTok Shop / Amazon / Shopee 等平台 | 实时检测违规词</p>
+  </header>
+
+  <div class="container">
+    <textarea id="input" placeholder="粘贴你的商品标题或描述在这里... 例如：This cream cures acne and is the best!"></textarea>
+    <button onclick="checkText()">🔍 立即检测合规性</button>
+    <div id="result"></div>
+  </div>
+
+  <footer>
+    <p>© 2026 电商合规检测工具 | 数据仅在您的浏览器中处理，绝不上传</p>
+  </footer>
+
+  <script>
+    // 从 /rules.json 动态加载最新规则
+    let rules = [];
+
+    fetch('/rules.json')
+      .then(res => res.json())
+      .then(data => {
+        rules = data.rules.map(r => ({
+          ...r,
+          pattern: new RegExp(r.pattern, 'gi')
+        }));
+      })
+      .catch(err => {
+        console.warn('Failed to load rules.json, using fallback');
+        rules = [
+          { name: "医疗宣称", pattern: /\b(cure|treat|heal)\b/gi },
+          { name: "绝对化用语", pattern: /\b(best|perfect)\b/gi }
+        ];
+      });
+
+    function checkText() {
+      const inputText = document.getElementById('input').value.trim();
+      const resultDiv = document.getElementById('result');
+      
+      if (!inputText) {
+        resultDiv.innerHTML = '<div class="fail">⚠️ 请输入文案后再点击检测！</div>';
+        return;
+      }
+
+      let outputText = inputText;
+      let violations = [];
+      let hasViolation = false;
+
+      rules.forEach(rule => {
+        const matches = [...outputText.matchAll(rule.pattern)];
+        if (matches.length > 0) {
+          hasViolation = true;
+          violations.push(`${rule.name}: ${matches.map(m => `"${m[0]}"`).join(', ')}`);
+          outputText = outputText.replace(rule.pattern, match => 
+            `<span class="highlight" title="违规类型: ${rule.name}">${match}</span>`
+          );
+        }
+      });
+
+      if (hasViolation) {
+        resultDiv.innerHTML = `
+          <div class="fail">
+            ❌ <strong>不通过！</strong> 检测到以下违规内容：<br><br>
+            ${violations.join('<br>')}
+            <hr style="margin:15px 0;">
+            ${outputText}
+          </div>
+        `;
+      } else {
+        resultDiv.innerHTML = `
+          <div class="pass">
+            ✅ <strong>通过！</strong> 未发现高危敏感词。文案合规！
+          </div>
+        `;
+      }
+    }
+  </script>
+</body>
+</html>
