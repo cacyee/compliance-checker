@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>电商文案合规检测 - 免费在线工具</title>
-  <meta name="description" content="一键检测 TikTok、Amazon、Shopee 商品文案是否违规，支持医疗宣称、绝对化用语等高危词实时高亮。">
+  <title>电商文案合规检测 - 免费在线工具 | E-commerce Copy Compliance Checker</title>
+  <meta name="description" content="一键检测 TikTok、Amazon、Shopee 商品文案是否违规，支持医疗宣称、绝对化用语等高危词实时高亮。 | Instantly check your TikTok, Amazon, Shopee product copy for compliance. Real-time highlighting of high-risk words.">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
@@ -18,6 +18,20 @@
       box-shadow: 0 2px 10px rgba(0,0,0,0.1);
       padding: 20px;
       text-align: center;
+      position: relative;
+    }
+    /* Language switcher */
+    #lang-switcher {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: none;
+      border: 1px solid #1a73e8;
+      color: #1a73e8;
+      padding: 5px 10px;
+      border-radius: 16px;
+      cursor: pointer;
+      font-size: 14px;
     }
     h1 {
       font-size: 28px;
@@ -39,7 +53,7 @@
       margin: 15px 0;
       resize: vertical;
     }
-    button {
+    button.main-btn {
       background: #1a73e8;
       color: white;
       border: none;
@@ -50,7 +64,7 @@
       width: 100%;
       font-weight: bold;
     }
-    button:hover {
+    button.main-btn:hover {
       background: #0d5bb8;
     }
     #result {
@@ -78,29 +92,98 @@
     @media (max-width: 600px) {
       h1 { font-size: 24px; }
       .container { padding: 0 15px; }
+      #lang-switcher {
+        top: 10px;
+        right: 10px;
+        font-size: 12px;
+        padding: 4px 8px;
+      }
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>📦 电商文案合规检测器</h1>
-    <p>支持 TikTok Shop / Amazon / Shopee 等平台 | 实时检测违规词</p>
+    <button id="lang-switcher">English</button>
+    <h1 id="title">📦 电商文案合规检测器</h1>
+    <p id="subtitle">支持 TikTok Shop / Amazon / Shopee 等平台 | 实时检测违规词</p>
   </header>
 
   <div class="container">
     <textarea id="input" placeholder="粘贴你的商品标题或描述在这里... 例如：This cream cures acne and is the best!"></textarea>
-    <button onclick="checkText()">🔍 立即检测合规性</button>
+    <button class="main-btn" onclick="checkText()" id="check-btn">🔍 立即检测合规性</button>
     <div id="result"></div>
   </div>
 
   <footer>
-    <p>© 2026 电商合规检测工具 | 数据仅在您的浏览器中处理，绝不上传</p>
+    <p id="footer-text">© 2026 电商合规检测工具 | 数据仅在您的浏览器中处理，绝不上传</p>
   </footer>
 
   <script>
-    // 从 /rules.json 动态加载最新规则
-    let rules = [];
+    // --- 双语翻译字典 ---
+    const translations = {
+      en: {
+        title: "📦 E-commerce Copy Compliance Checker",
+        subtitle: "Supports TikTok Shop / Amazon / Shopee | Real-time violation detection",
+        placeholder: "Paste your product title or description here... e.g., This cream cures acne and is the best!",
+        checkBtn: "🔍 Check Compliance Now",
+        emptyInput: "⚠️ Please enter your copy before checking!",
+        pass: "✅ <strong>Passed!</strong> No high-risk sensitive words found. Your copy is compliant!",
+        failPrefix: "❌ <strong>Failed!</strong> The following violations were detected:",
+        footer: "© 2026 E-commerce Compliance Checker | Your data is processed only in your browser, never uploaded."
+      },
+      zh: {
+        title: "📦 电商文案合规检测器",
+        subtitle: "支持 TikTok Shop / Amazon / Shopee 等平台 | 实时检测违规词",
+        placeholder: "粘贴你的商品标题或描述在这里... 例如：This cream cures acne and is the best!",
+        checkBtn: "🔍 立即检测合规性",
+        emptyInput: "⚠️ 请输入文案后再点击检测！",
+        pass: "✅ <strong>通过！</strong> 未发现高危敏感词。文案合规！",
+        failPrefix: "❌ <strong>不通过！</strong> 检测到以下违规内容：",
+        footer: "© 2026 电商合规检测工具 | 数据仅在您的浏览器中处理，绝不上传"
+      }
+    };
 
+    // --- 语言管理 ---
+    let currentLang = 'zh'; // 默认中文
+
+    // 从 URL 查询参数获取语言
+    const urlParams = new URLSearchParams(window.location.search);
+    const langFromUrl = urlParams.get('lang');
+    if (langFromUrl === 'en' || langFromUrl === 'zh') {
+      currentLang = langFromUrl;
+    }
+
+    function setLanguage(lang) {
+      currentLang = lang;
+      const t = translations[lang];
+      
+      // 更新页面文本
+      document.getElementById('title').textContent = t.title;
+      document.getElementById('subtitle').textContent = t.subtitle;
+      document.getElementById('input').placeholder = t.placeholder;
+      document.getElementById('check-btn').textContent = t.checkBtn;
+      document.getElementById('footer-text').innerHTML = t.footer;
+      document.getElementById('lang-switcher').textContent = lang === 'zh' ? 'English' : '中文';
+      
+      // 更新页面语言属性
+      document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+      
+      // 更新 URL
+      const newUrl = new URL(window.location);
+      newUrl.searchParams.set('lang', lang);
+      window.history.replaceState({}, '', newUrl);
+    }
+
+    // 绑定切换按钮事件
+    document.getElementById('lang-switcher').addEventListener('click', () => {
+      setLanguage(currentLang === 'zh' ? 'en' : 'zh');
+    });
+
+    // 初始化语言
+    setLanguage(currentLang);
+
+    // --- 核心检测逻辑 (保持不变) ---
+    let rules = [];
     fetch('/rules.json')
       .then(res => res.json())
       .then(data => {
@@ -112,17 +195,18 @@
       .catch(err => {
         console.warn('Failed to load rules.json, using fallback');
         rules = [
-          { name: "医疗宣称", pattern: /\b(cure|treat|heal)\b/gi },
-          { name: "绝对化用语", pattern: /\b(best|perfect)\b/gi }
+          { name: "Medical Claims", pattern: /\b(cure|treat|heal)\b/gi },
+          { name: "Absolute Claims", pattern: /\b(best|perfect)\b/gi }
         ];
       });
 
     function checkText() {
       const inputText = document.getElementById('input').value.trim();
       const resultDiv = document.getElementById('result');
+      const t = translations[currentLang];
       
       if (!inputText) {
-        resultDiv.innerHTML = '<div class="fail">⚠️ 请输入文案后再点击检测！</div>';
+        resultDiv.innerHTML = `<div class="fail">${t.emptyInput}</div>`;
         return;
       }
 
@@ -134,9 +218,12 @@
         const matches = [...outputText.matchAll(rule.pattern)];
         if (matches.length > 0) {
           hasViolation = true;
+          // 违规类型名称也应是双语的，但规则文件本身是固定的。
+          // 一个简单的方案是假设规则名本身就是英文，在中文模式下不翻译。
+          // 更好的方案是给 rules.json 增加多语言字段，这里为了简洁先这样处理。
           violations.push(`${rule.name}: ${matches.map(m => `"${m[0]}"`).join(', ')}`);
           outputText = outputText.replace(rule.pattern, match => 
-            `<span class="highlight" title="违规类型: ${rule.name}">${match}</span>`
+            `<span class="highlight" title="Violation Type: ${rule.name}">${match}</span>`
           );
         }
       });
@@ -144,18 +231,14 @@
       if (hasViolation) {
         resultDiv.innerHTML = `
           <div class="fail">
-            ❌ <strong>不通过！</strong> 检测到以下违规内容：<br><br>
+            ${t.failPrefix}<br><br>
             ${violations.join('<br>')}
             <hr style="margin:15px 0;">
             ${outputText}
           </div>
         `;
       } else {
-        resultDiv.innerHTML = `
-          <div class="pass">
-            ✅ <strong>通过！</strong> 未发现高危敏感词。文案合规！
-          </div>
-        `;
+        resultDiv.innerHTML = `<div class="pass">${t.pass}</div>`;
       }
     }
   </script>
