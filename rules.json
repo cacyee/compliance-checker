@@ -3,15 +3,15 @@
   "rules": [
     {
       "name": "医疗/疗效宣称 (Medical Claims)",
-      "pattern": "\\b(cure[sd]?|treat[esd]?|heal[sed]?|eliminates?|removes?|prevents?|reduces?|relieves?|soothes?|anti-?bacterial|anti-?viral|anti-?fungal|fda approved|ce certified|fcc certified|epa certified|medically proven|dermatologist tested|clinically proven|kills germs|boosts immunity|enhances immunity|treats acne|cures scars|permanent results?|instantly eliminates?|miracle cure|whitens?|brightens?|lightens skin|fades dark spots|erases wrinkles|reverses aging|lifts sagging skin|tightens pores|shrinks pores|melts fat|burns calories|blocks calories|detoxifies|cleanses toxins|purifies blood|regrows hair|stops hair loss|grows eyelashes|lengthens lashes|thickens hair|volumizes hair)\\b"
+      "pattern": "\\b(cure[sd]?|treat[esd]?|heal[sed]?|eliminates?|removes?|prevents?|reduces?|relieves?|soothes?|anti[- ]?bacterial|anti[- ]?viral|anti[- ]?fungal|fda approved|ce certified|fcc certified|epa certified|medically proven|dermatologist tested|clinically proven|kills germs|boosts immunity|enhances immunity|treats acne|cures scars|permanent results?|instantly eliminates?|miracle cure|whitens?|brightens?|lightens skin|fades dark spots|erases wrinkles|reverses aging|lifts sagging skin|tightens pores|shrinks pores|melts fat|burns calories|blocks calories|detoxifies|cleanses toxins|purifies blood|regrows hair|stops hair loss|grows eyelashes|lengthens lashes|thickens hair|volumizes hair)\\b"
     },
     {
       "name": "绝对化/极限用语 (Absolute/Superlative Claims)",
-      "pattern": "\\b(best|perfect|#1|ultimate|guaranteed results?|100% effective|most effective|highest quality|top rated|number one|world's best|only|unique|unmatched|irreplaceable|absolute best|completely safe|totally natural|purest form|maximum strength|superior to all|unbeatable price|cheapest ever|lowest price guaranteed|free|lifetime warranty|high quality|gift|best seller|hot sale|top seller|popular best)\\b"
+      "pattern": "\\b(best|perfect|number one|world[']?s best|only|unique|unmatched|irreplaceable|absolute best|completely safe|totally natural|purest form|maximum strength|superior to all|unbeatable price|cheapest ever|lowest price guaranteed|free|lifetime warranty|high quality|gift|best seller|hot sale|top seller|popular best|#1|ultimate|guaranteed results?|100[%]? effective|most effective|highest quality|top rated|number one)\\b"
     },
     {
       "name": "TikTok/站外引流 (Off-Platform Diversion)",
-      "pattern": "\\b(dm for link|comment to buy|free gift with purchase|add me on wechat|add my whatsapp|visit my website|check my bio|link in bio|paypal payment|pay via venmo|amazon link|shopify store|instagram page|snapchat me|telegram channel|whatsapp order|wechat id|line id|kakao talk|website|bio|paypal|apple pay|amazon|shopify|instagram|app|snapchat|page|contact us|we will reply|please contact|dm me|私信|加我|主页有链接)\\b"
+      "pattern": "\\b(dm|comment to buy|free gift with purchase|add me on wechat|add my whatsapp|visit my website|check my bio|link in bio|paypal|pay via venmo|amazon link|shopify store|instagram page|snapchat me|telegram channel|whatsapp order|wechat id|line id|kakao talk|website|bio|paypal|apple pay|amazon|shopify|instagram|app|snapchat|page|contact us|we will reply|please contact|私信|加我|主页有链接)\\b"
     },
     {
       "name": "虚假/未经证实宣称 (Unsubstantiated Claims)",
